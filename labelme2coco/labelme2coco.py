@@ -162,6 +162,6 @@ class MyEncoder(json.JSONEncoder):
 
 
 if __name__ == "__main__":
-    labelme_folder = "tests/data/labelme_annot"
-    save_json_path = "tests/data/test_coco.json"
+    labelme_folder = "E:/paper_exm/labelme/sbData/json/object1"
+    save_json_path = "E:/paper_exm/labelme/sbData/json/coco/coco.json"
     labelme2coco(labelme_folder, save_json_path)
