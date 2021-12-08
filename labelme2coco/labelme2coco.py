@@ -130,7 +130,10 @@ class labelme2coco(object):
         mask = np.zeros(img_shape, dtype=np.uint8)
         mask = PIL.Image.fromarray(mask)
         xy = list(map(tuple, polygons))
-        PIL.ImageDraw.Draw(mask).polygon(xy=xy, outline=1, fill=1)
+        if len(xy)==2 and (int(xy[0][0])==int(xy[1][0]) or int(xy[0][1])==int(xy[1][1])):
+            PIL.ImageDraw.Draw(mask).line(xy, fill=1)
+        else:
+            PIL.ImageDraw.Draw(mask).polygon(xy=xy, outline=1, fill=1)
         mask = np.array(mask, dtype=bool)
         return mask
 
@@ -162,6 +165,6 @@ class MyEncoder(json.JSONEncoder):
 
 
 if __name__ == "__main__":
-    labelme_folder = "E:/paper_exm/labelme/sbData/json/object1"
-    save_json_path = "E:/paper_exm/labelme/sbData/json/coco/coco.json"
+    labelme_folder = "E:/paper_exm/subwayData/abnormalJson"
+    save_json_path = "E:/paper_exm/subwayData/abCocoJson/coco.json"
     labelme2coco(labelme_folder, save_json_path)
